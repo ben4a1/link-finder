@@ -8,7 +8,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @ApplicationScoped
 public class LinkManagementInMemory implements LinkManagment {
     private CopyOnWriteArrayList<Link> links = new CopyOnWriteArrayList<Link>();
-
     public void setLinks(CopyOnWriteArrayList<Link> links) {
         this.links = links;
     }

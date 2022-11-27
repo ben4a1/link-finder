@@ -12,7 +12,7 @@
         <div class="p-field p-col-12 p-md-6">
             <p:outputLabel for="link" value="Анализируемая страница"/>
             <p:inputText id="link"/>
-            <p:commandButton value="Анализировать" id="analyze"
+            <p:commandButton update="linkTable" value="Анализировать" id="analyze"
             action="#{controller.buttonCheckLink()}" styleClass="ui-priority-primary"/>
         </div>
     </div>
@@ -44,9 +44,8 @@
         </h:form>
     </div>
 
-    <br>
+    <hr style="margin: 50px;"/>
 
-    </br>
     <p:linkButton href="http://www.primefaces.org" value="Navigate"/>
 </h:body>
 </html>

@@ -59,6 +59,7 @@ public class LinkController implements Serializable {
     }
 
     public void buttonCheckLink(){
+//        selectedLink
         FacesMessage message = new FacesMessage("Идёт анализ", "пока так");
         message.setSeverity(FacesMessage.SEVERITY_INFO);
         FacesContext.getCurrentInstance().addMessage(null, message);
