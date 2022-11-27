@@ -3,6 +3,7 @@ package by.paramonov.linkcount.dao;
 import by.paramonov.linkcount.model.Link;
 
 import javax.enterprise.context.ApplicationScoped;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @ApplicationScoped
@@ -28,4 +29,11 @@ public class LinkManagementInMemory implements LinkManagment {
             links.add(link);
         }
     }
+   public void analyzeLink(List<Link> linkList) {
+        linkList.stream().forEach(link -> {
+            synchronized (this) {
+                links.set(link.getId().intValue(), link);
+            }
+        });
+   }
 }

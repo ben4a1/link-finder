@@ -7,35 +7,31 @@
 </h:head>
 
 <h:body>
-
-    <div class="ui-fluid p-formgrid p-grid">
-        <div class="p-field p-col-12 p-md-6">
-            <p:outputLabel for="link" value="Анализируемая страница"/>
-            <p:inputText id="link"/>
-            <p:commandButton update="linkTable" value="Анализировать" id="analyze"
-            action="#{controller.buttonCheckLink()}" styleClass="ui-priority-primary"/>
-        </div>
+    <div class="activeTableTab" style="margin: 50px; padding: 20px;">
+        <p:outputLabel value="Анализируемая страница"/>
+        <p:inputText id="analyzeLink" value="#{controller.url}"/>
+        <p:commandButton update="display" value="Анализировать"
+                         id="analyze"/>
+        <h:outputLabel value="#{controller.url}" id="display"/>
     </div>
-
     <div class="ui-fluid">
         <h:form id="foundLinksForm">
             <div class="link-list" style="margin: 50px; padding: 20px;">
                 <p:outputLabel value="Обнаруженные ссылки" style="font-size: 2em;"/>
                 <p/>
-                <p:dataTable lazy="false" id="linkTable" var="link" value="#{controller.getLinks}"
-                             disabledSelection="#{link.complete == true}"
-                             selection="#{controller.selectedLinks}" rowKey="#{item.id}" paginator="true"
+                <p:dataTable lazy="false" id="linkTable" var="link" value="#{controller.links}"
+                             selection="#{controller.links}" rowKey="#{link.id}" paginator="true"
                              paginatorPosition="bottom" rows="5">
 
-                    <p:column headerText="№п/п">
+                    <p:column headerText="№ п/п" width="10%">
                         <h:outputLabel value="#{link.id}"/>
                     </p:column>
 
-                    <p:column headerText="Имя ссылки">
+                    <p:column headerText="Имя ссылки" width="25%">
                         <h:outputLabel value="#{link.linkName}"/>
                     </p:column>
 
-                    <p:column headerText="Адрес ссылки">
+                    <p:column headerText="Адрес ссылки" width="65%">
                         <h:outputLabel value="#{link.url}"/>
                     </p:column>
 

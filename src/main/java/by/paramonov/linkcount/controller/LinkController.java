@@ -2,13 +2,19 @@ package by.paramonov.linkcount.controller;
 
 import by.paramonov.linkcount.dao.LinkManagementInMemory;
 import by.paramonov.linkcount.model.Link;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 @Named("controller")
@@ -30,15 +36,11 @@ public class LinkController implements Serializable {
         return linkManagement.getLinks();
     }
     public void setLinks(List<Link> links) {
-        this.links = links;
-    }
-
-    private List<Link> selectedLinks;
-    public List<Link> getSelectedLinks() {
-        return selectedLinks;
-    }
-    public void setSelectedLinks(List<Link> selectedLinks) {
-        this.selectedLinks = selectedLinks;
+        try {
+            this.links = findLinks("");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private String linkName;
@@ -58,13 +60,29 @@ public class LinkController implements Serializable {
         this.url = url;
     }
 
+    public List<Link> findLinks(String url) throws IOException {
+        List<Link> links = new LinkedList<>();
+        Document doc = Jsoup.connect(url)
+                .data("query", "Java")
+                .userAgent("Chrome")
+                .cookie("auth", "token")
+                .timeout(3000)
+                .get();
+        Elements elements = doc.select("a[href]");
+        for (Element element : elements) {
+            if (element.attr("href").startsWith("https://")) {
+                links.add(new Link(element.attr("href"),
+                        element.text()));
+            }
+        }
+        return links;
+    }
     public void buttonCheckLink(){
 //        selectedLink
         FacesMessage message = new FacesMessage("Идёт анализ", "пока так");
         message.setSeverity(FacesMessage.SEVERITY_INFO);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
-
 
 
 }

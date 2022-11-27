@@ -6,6 +6,8 @@ import org.jsoup.nodes.Document;
 import java.io.IOException;
 
 public class Link {
+//    	^http(s)?:\/\/((\d+\.\d+\.\d+\.\d+)|(([\w-]+\.)+([a-z,A-Z][\w-]*)))(:[1-9][0-9]*)?(\/([\w-.\/:%+@&=]+[\w- .\/?:%+@&=]*)?)?(#(.*))?$/i
+
     private Long id;
     private String url;
     private String linkName;
