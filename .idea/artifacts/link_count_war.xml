@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="lint-count-1.0-SNAPSHOT.war">
+    <root id="archive" name="link-count-1.0-SNAPSHOT.war">
       <element id="artifact" artifact-name="link-count:war exploded" />
     </root>
   </artifact>

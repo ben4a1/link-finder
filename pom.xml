@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>by.paramonov</groupId>
-    <artifactId>lint-count</artifactId>
+    <artifactId>link-count</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>lint-count</name>
+    <name>link-count</name>
     <packaging>war</packaging>
 
     <properties>
@@ -46,7 +46,11 @@
             <artifactId>owasp-java-html-sanitizer</artifactId>
             <version>20220608.1</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.15.3</version>
+        </dependency>
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>

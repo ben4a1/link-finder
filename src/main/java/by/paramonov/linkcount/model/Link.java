@@ -1,5 +1,10 @@
 package by.paramonov.linkcount.model;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+import java.io.IOException;
+
 public class Link {
     private Long id;
     private String url;
@@ -9,17 +14,17 @@ public class Link {
     public Link() {
     }
 
-    public Link(String url, String linkName, boolean complete) {
+    public Link(String url) {
+        Document document;
         this.url = url;
-        this.linkName = linkName;
-        this.complete = complete;
+        try {
+            document = Jsoup.connect(url).get();
+            this.linkName = document.title();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public Link(String url, String linkName) {
-        this.url = url;
-        this.linkName = linkName;
-        this.complete = false;
-    }
     @Override
     public String toString(){
         return String.format("Link[id='%d', name='%s', URL='%s', complete='%b'",
