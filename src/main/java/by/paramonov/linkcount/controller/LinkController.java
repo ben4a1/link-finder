@@ -11,9 +11,11 @@ import org.jsoup.select.Elements;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.awt.*;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Named("controller")
 @ViewScoped
@@ -64,6 +66,8 @@ public class LinkController implements Serializable {
 
     //TODO variable 'userAgent in 'doc' initialize
     public void buttonAnalyze() throws IOException {
+//        Desktop
+        linkManagement.setLinks(new CopyOnWriteArrayList<>());
         Document doc = Jsoup.connect(this.url)
                 .data("query", "Java")
                 .userAgent("Chrome")

@@ -21,7 +21,7 @@ public class LinkManagementImpl implements ILinkManagment {
     public void addLink(Link link) {
         synchronized (this) {
             int size = links.size();
-            long id = 0;
+            long id = 1;
             if (size != 0) {
                 id = links.get(size - 1).getId();
                 id++;
