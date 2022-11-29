@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @ApplicationScoped
-public class LinkManagementImpl implements ILinkManagment {
+public class LinkManagementImpl implements ILinkManagement {
     private CopyOnWriteArrayList<Link> links = new CopyOnWriteArrayList<Link>();
     public void setLinks(CopyOnWriteArrayList<Link> links) {
         this.links = links;

@@ -1,5 +1,6 @@
 package by.paramonov.linkcount.controller;
 
+import by.paramonov.linkcount.client.LinkSearch;
 import by.paramonov.linkcount.dao.LinkManagementImpl;
 import by.paramonov.linkcount.model.Link;
 import jakarta.annotation.PostConstruct;
@@ -14,13 +15,17 @@ import javax.inject.Named;
 import java.awt.*;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Named("controller")
 @ViewScoped
 public class LinkController implements Serializable {
     private static long serialVersionUID = 1L;
+    private final static String URL_REGEX = "/^((http|https|ftp):\\/\\/)?(([A-Z0-9][A-Z0-9_-]*)(\\.[A-Z0-9][A-Z0-9_-]*)+)/i";
     @Inject
     LinkManagementImpl linkManagement;
     private List<Link> links;
@@ -64,27 +69,31 @@ public class LinkController implements Serializable {
         this.url = url;
     }
 
-    //TODO variable 'userAgent in 'doc' initialize
-    public void buttonAnalyze() throws IOException {
-//        Desktop
+    public void buttonAnalyze() {
         linkManagement.setLinks(new CopyOnWriteArrayList<>());
-        Document doc = Jsoup.connect(this.url)
-                .data("query", "Java")
-                .userAgent("Chrome")
-                .cookie("auth", "token")
-                .timeout(3000)
-                .get();
-        Elements elements = doc.select("a[href]");
+        Elements elements = LinkSearch.linkSearch(this.url);
         for (Element element : elements) {
-            if (element.attr("href").startsWith("https://")) {
-                linkManagement.addLink(new Link(element.attr("href"),
-                        element.text()));
+            Link tempLink = new Link();
+            Set<String> tempSetOfUrl = new HashSet<>();
+            String tempUrl = element.attr("href").trim();
+            if (tempUrl.startsWith("https://")
+                    || tempUrl.startsWith("http://")) {
+                tempLink.setUrl(tempUrl);
+            } else if (tempUrl.length() == 1
+                    || tempUrl.length() == 0) {
+                tempLink.setUrl(url);
+            } else {
+                tempLink.setUrl(url + tempUrl.substring(1, (tempUrl.length() - 1)));
+            }
+            tempLink.setLinkName(element.text());
+            if (tempSetOfUrl.add(tempLink.getUrl())) {
+                linkManagement.addLink(tempLink);
             }
         }
     }
 
-        @PostConstruct
-        public void init() {
+    @PostConstruct
+    public void init() {
         selectedLink = new Link();
     }
 }
