@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @ApplicationScoped
-public class LinkManagementInMemory implements LinkManagment {
+public class LinkManagementImpl implements ILinkManagment {
     private CopyOnWriteArrayList<Link> links = new CopyOnWriteArrayList<Link>();
     public void setLinks(CopyOnWriteArrayList<Link> links) {
         this.links = links;
@@ -17,6 +17,7 @@ public class LinkManagementInMemory implements LinkManagment {
         return links;
     }
 
+    @Override
     public void addLink(Link link) {
         synchronized (this) {
             int size = links.size();

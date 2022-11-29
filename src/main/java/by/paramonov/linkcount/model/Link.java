@@ -1,13 +1,17 @@
 package by.paramonov.linkcount.model;
 
+import lombok.Data;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.io.Serializable;
 
-public class Link {
-//    	^http(s)?:\/\/((\d+\.\d+\.\d+\.\d+)|(([\w-]+\.)+([a-z,A-Z][\w-]*)))(:[1-9][0-9]*)?(\/([\w-.\/:%+@&=]+[\w- .\/?:%+@&=]*)?)?(#(.*))?$/i
 
+@Data
+public class Link implements Serializable {
+
+    private static final long serialVersionUID = 6437012982370705547L;
     private Long id;
     private String url;
     private String linkName;

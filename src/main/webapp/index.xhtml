@@ -3,45 +3,49 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>Link count App</title>
+    <title>Link finder App</title>
 </h:head>
 
 <h:body>
-    <div class="activeTableTab" style="margin: 50px; padding: 20px;">
-        <p:outputLabel value="Анализируемая страница"/>
-        <p:inputText id="analyzeLink" value="#{controller.url}"/>
-        <p:commandButton update="display" value="Анализировать"
-                         id="analyze"/>
-        <h:outputLabel value="#{controller.url}" id="display"/>
-    </div>
     <div class="ui-fluid">
-        <h:form id="foundLinksForm">
-            <div class="link-list" style="margin: 50px; padding: 20px;">
-                <p:outputLabel value="Обнаруженные ссылки" style="font-size: 2em;"/>
-                <p/>
-                <p:dataTable lazy="false" id="linkTable" var="link" value="#{controller.links}"
-                             selection="#{controller.links}" rowKey="#{link.id}" paginator="true"
-                             paginatorPosition="bottom" rows="5">
+        <div class="p-field">
+            <h:form id="linkForSearch">
+                <div class="activeTableTab" style="margin: 50px; padding: 20px;">
+                    <p:outputLabel for="analyzeLink" value="Анализируемая страница"/>
+                    <p:inputText id="analyzeLink" value="#{controller.url}"/>
+                    <p:commandButton id="analyze" update=":foundLinksForm:linkTable" value="Анализировать"
+                                     action="#{controller.buttonAnalyze()}"
+                                     style="margin-right:20px;" styleClass="ui-priority-primary"/>
+                </div>
+            </h:form>
+        </div>
+        <div class="p-field">
+            <h:form id="foundLinksForm">
+                <div class="link-list" style="margin: 50px; padding: 20px;">
+                    <p:outputLabel value="Обнаруженные ссылки" style="font-size: 2em;"/>
+                    <p/>
+                    <p:dataTable lazy="true" id="linkTable" var="link" value="#{controller.links}"
+                                 selection="#{controller.links}" rowKey="#{link.id}" paginator="true"
+                                 paginatorPosition="bottom" rows="5">
 
-                    <p:column headerText="№ п/п" width="10%">
-                        <h:outputLabel value="#{link.id}"/>
-                    </p:column>
+                        <p:column headerText="№ п/п" width="10%">
+                            <h:outputLabel value="#{link.id}"/>
+                        </p:column>
 
-                    <p:column headerText="Имя ссылки" width="25%">
-                        <h:outputLabel value="#{link.linkName}"/>
-                    </p:column>
+                        <p:column headerText="Имя ссылки" width="25%">
+                            <h:outputLabel value="#{link.linkName}"/>
+                        </p:column>
 
-                    <p:column headerText="Адрес ссылки" width="65%">
-                        <h:outputLabel value="#{link.url}"/>
-                    </p:column>
+                        <p:column headerText="Адрес ссылки" width="65%">
+                            <h:outputLabel value="#{link.url}"/>
+                        </p:column>
 
-                </p:dataTable>
-            </div>
-        </h:form>
+                    </p:dataTable>
+                </div>
+            </h:form>
+        </div>
     </div>
-
     <hr style="margin: 50px;"/>
 
-    <p:linkButton href="http://www.primefaces.org" value="Navigate"/>
 </h:body>
 </html>
