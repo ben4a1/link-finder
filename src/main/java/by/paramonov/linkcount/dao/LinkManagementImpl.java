@@ -13,6 +13,10 @@ public class LinkManagementImpl implements ILinkManagement {
         this.links = links;
     }
 
+    public void clearLinks(){
+        links.clear();
+    }
+
     public CopyOnWriteArrayList<Link> getLinks() {
         return links;
     }

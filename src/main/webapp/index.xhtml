@@ -37,10 +37,11 @@
                         </p:column>
 
                         <p:column headerText="Адрес ссылки" width="65%">
-                            <h:outputLabel value="#{link.url}"/>
+                            <h:commandLink value="#{link.url}"/>
                         </p:column>
-
                     </p:dataTable>
+                    <p:commandButton id="clearTable" update="linkTable" value="Очистить"
+                                     action="#{controller.buttonClearTable()}"/>
                 </div>
             </h:form>
         </div>

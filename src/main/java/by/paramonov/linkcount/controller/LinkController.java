@@ -72,9 +72,9 @@ public class LinkController implements Serializable {
     public void buttonAnalyze() {
         linkManagement.setLinks(new CopyOnWriteArrayList<>());
         Elements elements = LinkSearch.linkSearch(this.url);
+        Set<String> tempSetOfUrl = new HashSet<>();
         for (Element element : elements) {
             Link tempLink = new Link();
-            Set<String> tempSetOfUrl = new HashSet<>();
             String tempUrl = element.attr("href").trim();
             if (tempUrl.startsWith("https://")
                     || tempUrl.startsWith("http://")) {
@@ -90,6 +90,10 @@ public class LinkController implements Serializable {
                 linkManagement.addLink(tempLink);
             }
         }
+    }
+
+    public void buttonClearTable() {
+        linkManagement.clearLinks();
     }
 
     @PostConstruct
