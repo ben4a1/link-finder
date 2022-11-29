@@ -23,7 +23,6 @@
             <h:form id="foundLinksForm">
                 <div class="link-list" style="margin: 50px; padding: 20px;">
                     <p:outputLabel value="Обнаруженные ссылки" style="font-size: 2em;"/>
-                    <p/>
                     <p:dataTable lazy="true" id="linkTable" var="link" value="#{controller.links}"
                                  selection="#{controller.links}" rowKey="#{link.id}" paginator="true"
                                  paginatorPosition="bottom" rows="25">
