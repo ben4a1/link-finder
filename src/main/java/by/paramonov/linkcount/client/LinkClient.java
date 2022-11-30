@@ -2,7 +2,6 @@ package by.paramonov.linkcount.client;
 
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
-import org.w3c.dom.Attr;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

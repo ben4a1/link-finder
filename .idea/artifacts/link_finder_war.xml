@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="link-finder:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>link-finder</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="link-count-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="link-finder:war exploded" />
+    </root>
+  </artifact>
+</component>

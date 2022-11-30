@@ -26,7 +26,7 @@
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/lint-count-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
       </element>
-      <element id="javaee-facet-resources" facet="link-count/web/Web" />
+      <element id="javaee-facet-resources" facet="link-finder/web/Web" />
     </root>
   </artifact>
 </component>
