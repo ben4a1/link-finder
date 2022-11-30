@@ -5,8 +5,6 @@ import by.paramonov.linkcount.dao.LinkManagementImpl;
 import by.paramonov.linkcount.model.Link;
 import jakarta.annotation.PostConstruct;
 import lombok.SneakyThrows;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -72,7 +70,7 @@ public class LinkController implements Serializable {
     public void buttonAnalyze() {
         if (LinkClient.checkUrl(this.url)) {
             linkManagement.setLinks(new CopyOnWriteArrayList<>());
-            Map<String, String> mapOfUrls = LinkClient.linkSearch(this.url);
+            Map<String, String> mapOfUrls = LinkClient.findLinksForResource(this.url);
             Iterator iterator = mapOfUrls.entrySet().iterator();
             while (iterator.hasNext()) {
                 Map.Entry pair = (Map.Entry) iterator.next();

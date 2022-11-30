@@ -17,7 +17,7 @@ public class LinkClient {
      * @param url адрес анализируемой WEB-страницы (URL должен начинаться 'https://' или 'http://').
      * @return Map<url, nameUrl>.
      */
-    public static Map<String, String> linkSearch(String url) {
+    public static Map<String, String> findLinksForResource(String url) {
         Map<String, String> mapOfUrls = new HashMap<>();
         Elements elements;
         try {
