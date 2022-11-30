@@ -2,16 +2,19 @@ package by.paramonov.linkcount.client;
 
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
+import org.w3c.dom.Attr;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class LinkClient {
 
+    /**
+     *
+     * @param url адрес анализируемой WEB-страницы.
+     * @return List элементов со списками атрибутов для каждого.
+     */
     public static Elements linkSearch(String url) {
         Elements el;
         try {
@@ -27,12 +30,15 @@ public class LinkClient {
         return el;
     }
 
+    /**
+     *
+     * @param url адрес анализируемой WEB-страницы.
+     * @return true, если запрос к @url выполнен успешно.
+     * @throws IOException если @url недоступен или не существует
+     */
     public static boolean checkUrl(String url) throws IOException {
         URL checkingUrl = new URL(url);
         HttpURLConnection huc = (HttpURLConnection) checkingUrl.openConnection();
-        if (huc.getResponseCode() == HttpURLConnection.HTTP_OK) {
-            return true;
-        } else return false;
-
+        return huc.getResponseCode() == HttpURLConnection.HTTP_OK;
     }
 }

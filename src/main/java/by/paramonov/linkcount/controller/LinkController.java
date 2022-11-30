@@ -68,6 +68,10 @@ public class LinkController implements Serializable {
         this.url = url;
     }
 
+    /**
+     * Происходит анализ введённой ссылки при нажатии.
+     * URL должен начинаться 'https://' или 'http://'
+     */
     @SneakyThrows
     public void buttonAnalyze() {
         if (LinkClient.checkUrl(this.url)) {
@@ -76,7 +80,7 @@ public class LinkController implements Serializable {
             Set<String> tempSetOfUrl = new HashSet<>();
             for (Element element : elements) {
                 Link tempLink = new Link();
-                String tempUrl = element.attr("href").trim();
+                String tempUrl = element.attr("href");
                 if (tempUrl.startsWith("https://")
                         || tempUrl.startsWith("http://")) {
                     tempLink.setUrl(tempUrl);
@@ -97,10 +101,17 @@ public class LinkController implements Serializable {
         }
     }
 
+    /**
+     * Происходит очистка формы обнаруженных ссылок.
+     */
     public void buttonClearTable() {
         linkManagement.clearLinks();
     }
 
+    /**
+     * происходит подстановка URL найденной страницы в строку для анализа.
+     * @param url
+     */
     public void buttonSetUrl(String url) {
         this.setUrl(url);
     }

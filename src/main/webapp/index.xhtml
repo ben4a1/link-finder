@@ -2,6 +2,49 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
+<!--<script type="text/javascript">-->
+<!--    //<![CDATA[-->
+<!--    /**-->
+<!--     * Faces Validator-->
+<!--     */-->
+<!--    PrimeFaces.validator['custom.urlValidator'] = {-->
+
+<!--        pattern: /^((http|https|ftp):\/\/)?(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)/i,-->
+
+<!--        validate: function (element, value) {-->
+<!--            element.data();-->
+<!--            if (!this.pattern.test(value)) {-->
+<!--                throw {-->
+<!--                    summary: 'Validation Error',-->
+<!--                    detail: value + ' is not a valid URL.'-->
+<!--                }-->
+<!--            }-->
+<!--        }-->
+<!--    };-->
+
+<!--    /**-->
+<!--     * Bean validator-->
+<!--     */-->
+<!--    PrimeFaces.validator['URL'] = {-->
+
+<!--        pattern: /^((http|https|ftp):\/\/)?(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)/i,-->
+
+<!--        MESSAGE_ID: 'by.paramonov.linkcount.validation.url.message',-->
+
+<!--        validate: function (element, value) {-->
+<!--            var vc = PrimeFaces.validation.ValidationContext;-->
+
+<!--            if (!this.pattern.test(value)) {-->
+<!--                var msgStr = element.data('p-url-msg'),-->
+<!--                    msg = msgStr ? {summary: msgStr, detail: msgStr} : vc.getMessage(this.MESSAGE_ID);-->
+
+<!--                throw msg;-->
+<!--            }-->
+<!--        }-->
+<!--    };-->
+<!--    //]]>-->
+<!--</script>-->
+
 <h:head>
     <title>Link finder App</title>
 </h:head>
@@ -36,7 +79,8 @@
                         </p:column>
 
                         <p:column headerText="Адрес ссылки" width="65%">
-                            <h:commandLink id="url" actionListener="#{controller.buttonSetUrl(link.url)}" value="#{link.url}"/>
+                            <h:commandLink id="url" actionListener="#{controller.buttonSetUrl(link.url)}"
+                                           value="#{link.url}"/>
                         </p:column>
                     </p:dataTable>
                     <p:commandButton id="clearTable" update="linkTable" value="Очистить"

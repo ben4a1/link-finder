@@ -1,0 +1,4 @@
+
+
+С помощью Apache Maven:
+mvn clean package
