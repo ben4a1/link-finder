@@ -36,7 +36,7 @@
                         </p:column>
 
                         <p:column headerText="Адрес ссылки" width="65%">
-                            <h:commandLink value="#{link.url}"/>
+                            <h:commandLink id="url" actionListener="#{controller.buttonSetUrl(link.url)}" value="#{link.url}"/>
                         </p:column>
                     </p:dataTable>
                     <p:commandButton id="clearTable" update="linkTable" value="Очистить"

@@ -96,6 +96,10 @@ public class LinkController implements Serializable {
         linkManagement.clearLinks();
     }
 
+    public void buttonSetUrl(String url) {
+        this.setUrl(url);
+    }
+
     @PostConstruct
     public void init() {
         selectedLink = new Link();
