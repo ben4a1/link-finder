@@ -21,7 +21,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @ViewScoped
 public class LinkController implements Serializable {
     private static long serialVersionUID = 1L;
-    private final static String URL_REGEX = "/^((http|https|ftp):\\/\\/)?(([A-Z0-9][A-Z0-9_-]*)(\\.[A-Z0-9][A-Z0-9_-]*)+)/i";
     @Inject
     LinkManagementImpl linkManagement;
     private List<Link> links;

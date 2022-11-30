@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class LinkClient {
 
+    private final static String URL_REGEX = "/^((http|https|ftp):\\/\\/)?(([A-Z0-9][A-Z0-9_-]*)(\\.[A-Z0-9][A-Z0-9_-]*)+)/i";
     /**
      * @param url адрес анализируемой WEB-страницы (URL должен начинаться 'https://' или 'http://').
      * @return Map<url, nameUrl>.
