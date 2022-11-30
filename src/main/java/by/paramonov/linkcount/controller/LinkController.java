@@ -14,9 +14,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Named("controller")
@@ -70,30 +68,17 @@ public class LinkController implements Serializable {
 
     /**
      * Происходит анализ введённой ссылки при нажатии.
-     * URL должен начинаться 'https://' или 'http://'
      */
     @SneakyThrows
     public void buttonAnalyze() {
         if (LinkClient.checkUrl(this.url)) {
             linkManagement.setLinks(new CopyOnWriteArrayList<>());
-            Elements elements = LinkClient.linkSearch(this.url);
-            Set<String> tempSetOfUrl = new HashSet<>();
-            for (Element element : elements) {
-                Link tempLink = new Link();
-                String tempUrl = element.attr("href");
-                if (tempUrl.startsWith("https://")
-                        || tempUrl.startsWith("http://")) {
-                    tempLink.setUrl(tempUrl);
-                } else if (tempUrl.length() == 1
-                        || tempUrl.length() == 0) {
-                    tempLink.setUrl(url);
-                } else {
-                    tempLink.setUrl(url + tempUrl.substring(1, (tempUrl.length() - 1)));
-                }
-                tempLink.setLinkName(element.text());
-                if (tempSetOfUrl.add(tempLink.getUrl())) {
-                    linkManagement.addLink(tempLink);
-                }
+            Map<String, String> mapOfUrls = LinkClient.linkSearch(this.url);
+            Iterator iterator = mapOfUrls.entrySet().iterator();
+            while (iterator.hasNext()) {
+                Map.Entry pair = (Map.Entry) iterator.next();
+                linkManagement.addLink(new Link(pair.getKey().toString(),
+                        pair.getValue().toString()));
             }
         } else {
             FacesContext.getCurrentInstance().addMessage("string",
@@ -110,6 +95,7 @@ public class LinkController implements Serializable {
 
     /**
      * происходит подстановка URL найденной страницы в строку для анализа.
+     *
      * @param url
      */
     public void buttonSetUrl(String url) {
